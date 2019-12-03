@@ -32,45 +32,24 @@ use OCP\IUser;
 /**
  * @since 18.0.0
  */
-class PostLoginEvent extends Event {
+class UserLoggedOutEvent extends Event {
 
-	/** @var IUser */
+	/** @var IUser|null */
 	private $user;
-
-	/** @var string */
-	private $password;
-
-	/** @var bool */
-	private $isTokenLogin;
 
 	/**
 	 * @since 18.0.0
 	 */
-	public function __construct(IUser $user, string $password, bool $isTokenLogin) {
+	public function __construct(IUser $user = null) {
 		parent::__construct();
 		$this->user = $user;
-		$this->password = $password;
-		$this->isTokenLogin = $isTokenLogin;
 	}
 
 	/**
 	 * @since 18.0.0
 	 */
-	public function getUser(): IUser {
+	public function getUser(): ?IUser {
 		return $this->user;
 	}
 
-	/**
-	 * @since 18.0.0
-	 */
-	public function getPassword(): string {
-		return $this->password;
-	}
-
-	/**
-	 * @since 18.0.0
-	 */
-	public function isTokenLogin(): bool {
-		return $this->isTokenLogin;
-	}
 }

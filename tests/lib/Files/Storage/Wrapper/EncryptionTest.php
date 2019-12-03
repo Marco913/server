@@ -569,7 +569,7 @@ class EncryptionTest extends Storage {
 			->setConstructorArgs(
 				[
 					new View(),
-					new Manager($this->config, $this->createMock(EventDispatcherInterface::class), $this->createMock(IEventDispatcher::class)),
+					new Manager($this->config, $this->createMock(IEventDispatcher::class)),
 					$this->groupManager,
 					$this->config,
 					$this->arrayCache

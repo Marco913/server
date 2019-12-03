@@ -12,13 +12,13 @@ namespace Test\User;
 use OC\Hooks\PublicEmitter;
 use OC\User\User;
 use OCP\Comments\ICommentsManager;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IConfig;
 use OCP\IUser;
 use OCP\Notification\IManager as INotificationManager;
 use OCP\Notification\INotification;
 use OCP\UserInterface;
 use PHPUnit\Framework\MockObject\MockObject;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Test\TestCase;
 
 /**
@@ -30,17 +30,17 @@ use Test\TestCase;
  */
 class UserTest extends TestCase {
 
-	/** @var EventDispatcherInterface|MockObject */
+	/** @var IEventDispatcher|MockObject */
 	protected $dispatcher;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->dispatcher = $this->createMock(EventDispatcherInterface::class);
+		$this->dispatcher = $this->createMock(IEventDispatcher::class);
 	}
 
 	public function testDisplayName() {
 		/**
-		 * @var \OC\User\Backend | \PHPUnit_Framework_MockObject_MockObject $backend
+		 * @var \OC\User\Backend|MockObject $backend
 		 */
 		$backend = $this->createMock(\OC\User\Backend::class);
 		$backend->expects($this->once())

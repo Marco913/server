@@ -28,7 +28,7 @@ use OCP\EventDispatcher\Event;
 /**
  * @since 18.0.0
  */
-class CreateUserEvent extends Event {
+class BeforeUserCreatedEvent extends Event {
 
 	/** @var string */
 	private $uid;
