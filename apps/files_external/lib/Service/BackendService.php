@@ -24,6 +24,7 @@
 
 namespace OCA\Files_External\Service;
 
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
 use OCA\Files_External\Config\IConfigHandler;
 use OCA\Files_External\Lib\Auth\AuthMechanism;
 
@@ -109,9 +110,8 @@ class BackendService {
 	private function callForRegistrations() {
 		static $eventSent = false;
 		if(!$eventSent) {
-			\OC::$server->getEventDispatcher()->dispatch(
-				'OCA\\Files_External::loadAdditionalBackends'
-			);
+			$event = new LoadAdditionalScriptsEvent();
+			\OC::$server->getEventDispatcher()->dispatch(LoadAdditionalScriptsEvent::class, $event);
 			$eventSent = true;
 		}
 	}
