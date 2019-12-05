@@ -453,7 +453,7 @@ class Server extends ServerContainer implements IServerContainer {
 				\OC_Hook::emit('OC_User', 'pre_deleteUser', ['run' => true, 'uid' => $event->getUser()->getUID()]);
 			});
 			$eventDispatcher->addListener(UserDeletedEvent::class, function(UserDeletedEvent $event) use ($symfonyDispatcher, $c) {
-				$symfonyDispatcher->dispatch(IUser::class . '::postDelete', new GenericEvent($this));
+				$symfonyDispatcher->dispatch(IUser::class . '::postDelete', new GenericEvent($event->getUser()));
 				$c->getUserManager()->emit('\OC\User', 'postDelete', [$event->getUser()]);
 				\OC_Hook::emit('OC_User', 'post_deleteUser', ['uid' => $event->getUser()->getUID()]);
 			});
@@ -464,7 +464,7 @@ class Server extends ServerContainer implements IServerContainer {
 					'oldValue' => $event->getOldValue(),
 				]));
 				$c->getUserManager()->emit('\OC\User', 'changeUser', [
-					$this,
+					$event->getUser(),
 					$event->getFeature(),
 					$event->getValue(),
 					$event->getOldValue(),

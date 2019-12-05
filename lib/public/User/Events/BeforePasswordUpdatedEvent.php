@@ -37,18 +37,18 @@ class BeforePasswordUpdatedEvent extends Event {
 	/** @var string */
 	private $password;
 
-	/** @var string */
+	/** @var string|null */
 	private $recoveryPassword;
 
 	/**
 	 * @param IUser $user
 	 * @param string $password
-	 * @param string $recoveryPassword
+	 * @param string|null $recoveryPassword
 	 * @since 18.0.0
 	 */
 	public function __construct(IUser $user,
 								string $password,
-								string $recoveryPassword) {
+								string $recoveryPassword = null) {
 		parent::__construct();
 		$this->user = $user;
 		$this->password = $password;
@@ -72,10 +72,10 @@ class BeforePasswordUpdatedEvent extends Event {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 * @since 18.0.0
 	 */
-	public function getRecoveryPassword(): string {
+	public function getRecoveryPassword(): ?string {
 		return $this->recoveryPassword;
 	}
 
