@@ -19,7 +19,6 @@ use OCP\Files\Cache\ICache;
 use OCP\Files\Mount\IMountPoint;
 use OCP\IConfig;
 use OCP\ILogger;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Test\Files\Storage\Storage;
 
 class EncryptionTest extends Storage {
@@ -638,7 +637,7 @@ class EncryptionTest extends Storage {
 			->willReturn($exists);
 
 		$util = $this->getMockBuilder('\OC\Encryption\Util')
-			->setConstructorArgs([new View(), new Manager($this->config, $this->createMock(EventDispatcherInterface::class), $this->createMock(IEventDispatcher::class)), $this->groupManager, $this->config, $this->arrayCache])
+			->setConstructorArgs([new View(), new Manager($this->config, $this->createMock(IEventDispatcher::class)), $this->groupManager, $this->config, $this->arrayCache])
 			->getMock();
 
 		$cache = $this->getMockBuilder('\OC\Files\Cache\Cache')
